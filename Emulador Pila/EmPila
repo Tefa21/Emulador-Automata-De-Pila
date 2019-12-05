@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+#include <cstring>
+#include <fstream>
+
+using namespace std;
+
+void Separacion(string Linea);
+
+int main() {
+	fstream Archivo;
+	string Nombre;
+	string Linea;
+
+	cout << "Ingrese La Direccion Del Archivo De Texto: ";
+	getline(cin, Nombre);
+	Archivo.open(Nombre.c_str(), ios::in);
+
+
+	if (Archivo.is_open()) {
+
+		while (!Archivo.eof()) {
+			getline(Archivo, Linea);
+
+			//Separacion(Linea);
+			cout << "Leido: " << Linea << endl;
+		}
+
+		Archivo.close();
+	}else cout << "No Se Encontro El Archivo" << endl;
+
+	return 0;
+}
+
+void Separacion(string Linea) {
+	char cstr[Linea.size() + 1];
+	strcpy(cstr, Linea.c_str());
+
+	char *ptr;
+
+	ptr = strtok(cstr, " ");//argumentos: frase, caracter delimitador
+	while (ptr != NULL)
+	{
+		cout << ptr << endl;
+		ptr = strtok(NULL, " ");
+	}
+}
